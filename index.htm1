@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>All Trending Image Prompts</title>
+  <meta name="description" content="Discover trending AI image prompts. Browse, preview and copy creative prompts for your next AI image.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #08090d;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 9, 13, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 16px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      opacity: 0.55;
+    }
+
+    .login-btn {
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      padding: 9px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 28px 16px 20px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #9296a3;
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 350px;
+    }
+
+    /* SEARCH */
+    .search-box {
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      outline: none;
+      background: #12141b;
+      color: white;
+      font-size: 14px;
+    }
+
+    .search-box input::placeholder {
+      color: #686c78;
+    }
+
+    /* CATEGORIES */
+    .categories {
+      display: flex;
+      gap: 9px;
+      overflow-x: auto;
+      padding: 4px 16px 18px;
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category {
+      flex: 0 0 auto;
+      padding: 9px 14px;
+      border-radius: 20px;
+      background: #12141b;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #c8cad1;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .category.active {
+      background: white;
+      color: black;
+      border-color: white;
+    }
+
+    /* SECTION */
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px 14px;
+    }
+
+    .section-title h2 {
+      font-size: 19px;
+    }
+
+    .section-title span {
+      color: #777b87;
+      font-size: 12px;
+    }
+
+    /* IMAGE GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 10px 40px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 17px;
+      background: #12141b;
+      cursor: pointer;
+      min-height: 210px;
+    }
+
+    .card.tall {
+      min-height: 290px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      min-height: 210px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .card.tall img {
+      min-height: 290px;
+    }
+
+    .card:hover img {
+      transform: scale(1.04);
+    }
+
+    .card-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 35px 12px 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    }
+
+    .trend {
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      padding: 5px 8px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 30px 16px;
+      color: #666a75;
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* DESKTOP ADAPTATION */
+    @media (min-width: 700px) {
+      .hero {
+        max-width: 900px;
+        margin: auto;
+        padding-top: 55px;
+      }
+
+      .categories {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      .grid {
+        max-width: 1000px;
+        margin: auto;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .card.tall {
+        min-height: 360px;
+      }
+
+      .card.tall img {
+        min-height: 360px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div class="logo">
+        All Trending<span> Image Prompts</span>
+      </div>
+
+      <button class="login-btn">
+        Login
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <h1>Turn Ideas Into<br>Stunning Images.</h1>
+
+      <p>
+        Discover trending AI image prompts, explore creative ideas,
+        and copy the prompt you need.
+      </p>
+
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="Search image prompts..."
+          id="searchInput"
+        >
+      </div>
+    </section>
+
+    <div class="categories">
+      <div class="category active">🔥 Trending</div>
+      <div class="category">Portraits</div>
+      <div class="category">Cinematic</div>
+      <div class="category">Fashion</div>
+      <div class="category">Cars</div>
+      <div class="category">Luxury</div>
+      <div class="category">Anime</div>
+      <div class="category">3D</div>
+    </div>
+
+    <div class="section-title">
+      <h2>🔥 Trending Prompts</h2>
+      <span>Explore all →</span>
+    </div>
+
+    <section class="grid">
+
+      <div class="card tall">
+        <img
+          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+          alt="AI portrait inspiration"
+        >
+
+        <div class="card-overlay">
+          <div class="trend">TRENDING</div>
+          <div class="card-title">Cinematic Portrait</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80"
+          alt="Portrait inspiration"
+        >
+
+        <div class="card-overlay">
+          <div class="trend">HOT</div>
+          <div class="card-title">Luxury Portrait</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+          alt="Cinematic landscape"
+        >
+
+        <div class="card-overlay">
+          <div class="trend">NEW</div>
+          <div class="card-title">Cinematic World</div>
+        </div>
+      </div>
+
+      <div class="card tall">
+        <img
+          src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=800&q=80"
+          alt="Night landscape inspiration"
+        >
+
+        <div class="card-overlay">
+          <div class="trend">TRENDING</div>
+          <div class="card-title">Dreamy Night</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80"
+          alt="Modern interior"
+        >
+
+        <div class="card-overlay">
+          <div class="trend">POPULAR</div>
+          <div class="card-title">Modern Interior</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80"
+          alt="Luxury car"
+        >
+
+        <div class="card-overlay">
+          <div class="trend">HOT</div>
+          <div class="card-title">Luxury Automotive</div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 All Trending Image Prompts
+    <br>
+    Copy. Create. Go Viral.
+  </footer>
+
+</body>
+</html>
